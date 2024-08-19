@@ -100,4 +100,67 @@
   textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  /* Feedback list */
+  .feedback-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .feedback-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  /* FAQ section */
+  .faq-item {
+    margin-bottom: 20px;
+  }
+  
+  .faq-item h3 {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 4px;
+  }
+  
+  .faq-answer {
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .successtext {
+    color: greenyellow;
+  }
+
+  .failtext {
+    color: red;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    h1 {
+      font-size: 2em;
+    }
+  
+    h2 {
+      font-size: 1.5em;
+    }
+  
+    nav a {
+      display: block;
+      padding: 10px;
+    }
+  }

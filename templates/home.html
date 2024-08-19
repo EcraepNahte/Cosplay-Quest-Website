@@ -5,18 +5,37 @@
     <h1>Welcome to Cosplay Quest</h1>
     <p>Embark on an adventure in the world of cosplay with our exciting app!</p>
     
-    <div class="cta-buttons">
+    <div id="responseMessage"></div>
+    <form hx-post="/beta-signup" hx-swap="innerHTML scroll" hx-target="#responseMessage">
+        <h2>Sign up to be part of the beta!</h2>
+        <label for="name">Name <span style="color: red;">*</span></label>
+        <input type="text" id="name" name="name" placeholder="name" required />
+        <label for="email">Email Address <span style="color: red;">*</span></label>
+        <input type="email" id="email" name="email" placeholder="email" required />
+        <label for="device_os">Device OS <span style="color: red;">*</span></label>
+        <select id="device_os" name="device_os" required>
+            <option value="android">Android</option>
+            <option value="ios">iOS</option>
+        </select>
+        <label for="next_con">What is the next cosplay event you plan on attending?</label>
+        <input type="text" id="next_con" name="next_con" placeholder="next cosplay event" />
+        <label for="next_con_date">When does it take place?</label>
+        <input type="date" id="next_con_date" name="next_con_date" />
+        <p><i><span style="color: red;">*</span> indicates a required field.</i></p>
+        <input type="submit" value="Submit" />
+    </form>
+
+    <!-- <div class="cta-buttons">
         <a href="#" class="button button-primary">Download for iOS</a>
         <a href="#" class="button button-secondary">Download for Android</a>
-    </div>
+    </div> -->
 
     <div class="features">
         <h2>Key Features</h2>
         <ul>
-            <li>Discover new cosplay ideas</li>
-            <li>Connect with fellow cosplayers</li>
-            <li>Track your cosplay projects</li>
-            <li>Find local cosplay events</li>
+            <li>Interact with the Cosplay Community, and have fun doing it.</li>
+            <li>Edit and add Frames to your Photos of Cosplayers.</li>
+            <li>Filter taken Photos by Character, Franchise, or Convention.</li>
         </ul>
     </div>
 

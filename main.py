@@ -34,6 +34,11 @@ async def info(request: Request):
 async def feedback_form(request: Request):
     return templates.TemplateResponse("feedback.html", {"request": request})
 
+@app.post("/beta-signup")
+async def beta_signup(request: Request, name: str = Form(...), email: str=Form(...), device_os: str = Form(...), next_con: str = Form(None), next_con_date: datetime.date = Form(None), db: Session = Depends(get_db)):
+    crud.create_beta_signup(db, name, email, device_os, next_con, next_con_date)
+    return templates.TemplateResponse("partials/beta_response.html", {"request": request, "success": True, "email": email})
+
 @app.post("/feedback")
 async def submit_feedback(request: Request, name: str = Form(...), email: str = Form(...), message: str = Form(...), db: Session = Depends(get_db)):
     crud.create_feedback(db, name, email, message, datetime.datetime.now())
@@ -62,3 +67,4 @@ async def feedback_stats(request: Request, db: Session = Depends(get_db)):
     total_feedback = db.query(models.Feedback).count()
     recent_feedback = db.query(models.Feedback).filter(models.Feedback.created_at >= datetime.datetime.now(datetime.UTC) - datetime.timedelta(days=7)).count()
     return templates.TemplateResponse("partials/feedback_stats.html", {"request": request, "total_feedback": total_feedback, "recent_feedback": recent_feedback})
+
