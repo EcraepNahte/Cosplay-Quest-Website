@@ -5,7 +5,6 @@
     <h1>Welcome to Cosplay Quest</h1>
     <p>Embark on an adventure in the world of cosplay with our exciting app!</p>
     
-    <div id="responseMessage"></div>
     <form hx-post="/beta-signup" hx-swap="innerHTML scroll" hx-target="#responseMessage">
         <h2>Sign up to be part of the beta!</h2>
         <label for="name">Name <span style="color: red;">*</span></label>
@@ -24,6 +23,7 @@
         <p><i><span style="color: red;">*</span> indicates a required field.</i></p>
         <input type="submit" value="Submit" />
     </form>
+    <div id="responseMessage"></div>
 
     <!-- <div class="cta-buttons">
         <a href="#" class="button button-primary">Download for iOS</a>
