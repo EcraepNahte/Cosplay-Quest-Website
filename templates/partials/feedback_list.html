@@ -1,0 +1,8 @@
+<ul>
+    {% for feedback in feedback_list %}
+    <li class="feedback-item">
+        <h3>{{ feedback.name }} ({{ feedback.email }})</h3>
+        <p>{{ feedback.message }}</p>
+    </li>
+    {% endfor %}
+</ul>

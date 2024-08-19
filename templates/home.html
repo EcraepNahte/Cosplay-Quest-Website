@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome to Cosplay Quest</h1>
+    <p>Embark on an adventure in the world of cosplay with our exciting app!</p>
+    
+    <div class="cta-buttons">
+        <a href="#" class="button button-primary">Download for iOS</a>
+        <a href="#" class="button button-secondary">Download for Android</a>
+    </div>
+
+    <div class="features">
+        <h2>Key Features</h2>
+        <ul>
+            <li>Discover new cosplay ideas</li>
+            <li>Connect with fellow cosplayers</li>
+            <li>Track your cosplay projects</li>
+            <li>Find local cosplay events</li>
+        </ul>
+    </div>
+
+    <div class="app-preview">
+        <img src="{{ url_for('static', path='/images/app-preview.jpg') }}" alt="Cosplay Quest App Preview">
+    </div>
+</div>
+{% endblock %}

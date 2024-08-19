@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>About Cosplay Quest</h1>
+    
+    <section class="app-description">
+        <h2>What is Cosplay Quest?</h2>
+        <p>Cosplay Quest is the </p>
+    </section>
+
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <ol>
+            <li>Download the app</li>
+            <li>Create Event Data</li>
+            <li>Start a Cosplay Quest!</li>
+        </ol>
+    </section>
+
+    <section class="faq" hx-target="this" hx-swap="outerHTML">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3 hx-get="/faq/1" hx-trigger="click" hx-target="faq1">Is Cosplay Quest free?</h3>
+            <div class="faq-answer" id="faq-1"></div>
+        </div>
+        <div class="faq-item">
+            <h3 hx-get="/faq/2" hx-trigger="click" hx-target="faq-2">How do I start a cosplay project?</h3>
+            <div class="faq-answer" id="faq-2"></div>
+        </div>
+        <!-- Add more FAQ items as needed -->
+    </section>
+</div>
+{% endblock %}

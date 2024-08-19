@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Developer Dashboard</h1>
+    <p>Review user feedback for Cosplay Quest.</p>
+
+    <div class="feedback-list">
+        <h2>User Feedback</h2>
+        <ul hx-get="/refresh-feedback" hx-trigger="load, every 30s">
+            {% for feedback in feedback_list %}
+            <li class="feedback-item">
+                <h3>{{ feedback.name }} ({{ feedback.email }})</h3>
+                <p>{{ feedback.message }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="feedback-stats">
+        <h2>Feedback Statistics</h2>
+        <div hx-get="/feedback-stats" hx-trigger="load, every 60s">
+            <!-- This will be populated by the server -->
+        </div>
+    </div>
+</div>
+{% endblock %}
