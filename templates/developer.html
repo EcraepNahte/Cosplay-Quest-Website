@@ -23,5 +23,23 @@
             <!-- This will be populated by the server -->
         </div>
     </div>
+
+    <p>Review beta signups for Cosplay Quest.</p>
+
+    <div class="feedback-list">
+        <h2>Beta Signups</h2>
+        <ul hx-get="/refresh-beta-signups" hx-trigger="load, every 30s">
+            {% for beta_signup in beta_signup_list %}
+            <li class="feedback-item">
+                <h3>{{ beta_signup.name }} ({{ beta_signup.email }})</h3>
+                <p>{{ beta_signup.next_con }}</p>
+                <p>{{ beta_signup.next_con_date }}</p>
+                <p>{{ beta_signup.will_cosplay }}</p>
+                <p>{{ beta_signup.character }}</p>
+                <p>{{ beta_signup.source_media }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

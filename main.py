@@ -34,9 +34,16 @@ async def info(request: Request):
 async def feedback_form(request: Request):
     return templates.TemplateResponse("feedback.html", {"request": request})
 
+@app.get("/toggle-character-form")
+async def character_form(request: Request, will_cosplay: bool = False):
+    if will_cosplay:
+        return templates.TemplateResponse("partials/cosplay_character.html", {"request": request})
+    else:
+        return templates.TemplateResponse("partials/empty.html", {"request": request})
+
 @app.post("/beta-signup")
-async def beta_signup(request: Request, name: str = Form(...), email: str=Form(...), device_os: str = Form(...), next_con: str = Form(None), next_con_date: datetime.date = Form(None), db: Session = Depends(get_db)):
-    crud.create_beta_signup(db, name, email, device_os, next_con, next_con_date)
+async def beta_signup(request: Request, name: str = Form(...), email: str=Form(...), device_os: str = Form(...), next_con: str = Form(None), next_con_date: datetime.date = Form(None), will_cosplay: bool = Form(None), character: str = Form(None), source_media: str = Form(None), db: Session = Depends(get_db)):
+    crud.create_beta_signup(db, name, email, device_os, next_con, next_con_date, will_cosplay, character, source_media)
     return templates.TemplateResponse("partials/beta_response.html", {"request": request, "success": True, "email": email})
 
 @app.post("/feedback")
@@ -47,7 +54,8 @@ async def submit_feedback(request: Request, name: str = Form(...), email: str = 
 @app.get("/developer")
 async def developer(request: Request, db: Session = Depends(get_db)):
     feedback_list = crud.get_all_feedback(db)
-    return templates.TemplateResponse("developer.html", {"request": request, "feedback_list": feedback_list})
+    beta_signup_list = crud.get_all_beta_signups(db)
+    return templates.TemplateResponse("developer.html", {"request": request, "feedback_list": feedback_list, "beta_signup_list": beta_signup_list})
 
 @app.get("/faq/{faq_id}")
 async def faq(request: Request, faq_id: int):

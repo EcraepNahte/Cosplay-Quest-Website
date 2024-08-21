@@ -217,15 +217,16 @@
     border-radius: 50%;
   }
 
-  .hiddendiv {
+  .fillable_div {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
     max-height: 0;
+    opacity: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
   }
-  
-  input[name="will_cosplay"]:checked + #characterform {
-    max-height: 500px; /* Adjust this value based on your content */
-    transition: max-height 0.5s ease-in;
+
+  .fillable_div:not(:empty) {
+    max-height: 500px; /* Adjust as needed */
+    opacity: 1;
   }
   
   /* Responsive design */
