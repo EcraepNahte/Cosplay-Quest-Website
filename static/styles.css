@@ -281,4 +281,17 @@
       display: block;
       padding: 10px;
     }
+
+    .marching-box {
+      width: 400%;
+    }
+
+    @keyframes march {
+      0% {
+        transform: translateX(-75%);
+      }
+      100% {
+        transform: translateX(-25%);
+      } 
+    }
   }
