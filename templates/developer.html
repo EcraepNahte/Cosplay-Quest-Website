@@ -32,6 +32,7 @@
             {% for beta_signup in beta_signup_list %}
             <li class="feedback-item">
                 <h3>{{ beta_signup.name }} ({{ beta_signup.email }})</h3>
+                <p>{{ beta_signup.device_os }}</p>
                 <p>{{ beta_signup.next_con }}</p>
                 <p>{{ beta_signup.next_con_date }}</p>
                 <p>{{ beta_signup.will_cosplay }}</p>
