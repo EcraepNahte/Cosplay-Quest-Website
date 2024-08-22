@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, func
+from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, func
 from .database import Base
 
 class Feedback(Base):
@@ -19,4 +19,7 @@ class BetaSignup(Base):
     device_os = Column(String)
     next_con = Column(String, nullable=True)
     next_con_date = Column(DateTime, nullable=True)
+    will_cosplay = Column(Boolean)
+    character = Column(String, nullable=True)
+    source_media = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

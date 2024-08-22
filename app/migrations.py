@@ -17,33 +17,39 @@ def run_migrations():
     cursor = conn.cursor()
 
     # Check if the column exists
-    cursor.execute("PRAGMA table_info(feedback)")
+    cursor.execute("PRAGMA table_info(beta_signup)")
     columns = [column[1] for column in cursor.fetchall()]
 
-    if "created_at" not in columns:
+    if "will_cosplay" not in columns or "character" not in columns:
         # Create a new table with the desired schema
+        cursor.execute('DROP TABLE new_beta_signup')
         cursor.execute("""
-        CREATE TABLE new_feedback (
+        CREATE TABLE new_beta_signup (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name VARCHAR,
             email VARCHAR,
-            message TEXT,
+            device_os VARCHAR,
+            next_con VARCHAR,
+            next_con_date TIMESTAMP,
+            will_cosplay BOOLEAN,
+            character VARCHAR,
+            source_media VARCHAR,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
         """)
 
         # Copy data from the old table to the new table
-        cursor.execute("INSERT INTO new_feedback (id, name, email, message) SELECT id, name, email, message FROM feedback")
+        cursor.execute("INSERT INTO new_beta_signup (id, name, email, device_os, next_con, created_at) SELECT id, name, email, device_os, next_con, created_at FROM beta_signup")
 
         # Drop the old table
-        cursor.execute("DROP TABLE feedback")
+        cursor.execute("DROP TABLE beta_signup")
 
         # Rename the new table to the original table name
-        cursor.execute("ALTER TABLE new_feedback RENAME TO feedback")
+        cursor.execute("ALTER TABLE new_beta_signup RENAME TO beta_signup")
 
-        print("Migration completed: 'created_at' column added to the feedback table.")
+        print("Migration completed: 'will_cosplay', 'character', 'source_media' column added to the beta_signup table.")
     else:
-        print("Column 'created_at' already exists. No migration needed.")
+        print("Migration completed: 'will_cosplay', 'character', 'source_media' already exist in the beta_signup table.")
 
     # Commit the changes and close the connection
     conn.commit()

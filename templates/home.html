@@ -22,17 +22,12 @@
         <input type="date" id="next_con_date" name="next_con_date" />
         <div class="switchbox">
             <label class="switch">
-                <input type="checkbox" id="will_cosplay" name="will_cosplay">
+                <input type="checkbox" id="will_cosplay" name="will_cosplay" hx-get="/toggle-character-form" hx-target="#character_form_container" hx-swap="innerHTML">
                 <span class="slider round"></span>
             </label>
             <label for="will_cosplay" class="switchlabel">I am going to cosplay.</label>
         </div>
-        <div id="characterform" class="hiddendiv">
-            <label for="character">Who do you plan on cosplaying as?</label>
-            <input type="text" id="character" name="character" placeholder="character name" />
-            <label for="source_media">What is that character from?</label>
-            <input type="text" id="source_media" name="source_media" placeholder="character source" />
-        </div>
+        <div id="character_form_container" class="fillable_div"></div>
         <p><i><span style="color: red;">*</span> indicates a required field.</i></p>
         <input type="submit" value="Submit" class="button button-primary"/>
     </form>
