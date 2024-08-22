@@ -22,7 +22,6 @@ def run_migrations():
 
     if "will_cosplay" not in columns or "character" not in columns:
         # Create a new table with the desired schema
-        cursor.execute('DROP TABLE new_beta_signup')
         cursor.execute("""
         CREATE TABLE new_beta_signup (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
