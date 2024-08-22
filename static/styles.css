@@ -229,6 +229,40 @@
     opacity: 1;
   }
   
+  .image-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marching-box {
+    height: 15vh;
+    width: 200%;
+    animation: march 15s linear infinite;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .marching-image {
+    height: -webkit-fill-available;
+    margin: 10px auto;
+  }
+
+  .eighth-width {
+    display: inline-flex;
+    height: inherit;
+    width: 12.5%;
+    align-items: center;
+  }
+
+  @keyframes march {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    } 
+  }
+  
   /* Responsive design */
   @media (max-width: 768px) {
     .container {

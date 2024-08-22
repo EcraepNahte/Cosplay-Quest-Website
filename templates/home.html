@@ -1,10 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="image-container">
+    <div class="marching-box">
+        <span class="eighth-width">
+            <img src="{{ url_for('static', path='/images/blobby.png') }}" alt="Marching image" class="marching-image">
+        </span>
+        <span class="eighth-width">
+            <img src="{{ url_for('static', path='/images/blobby_cat.png') }}" alt="Marching image" class="marching-image">
+        </span>
+        <span class="eighth-width">
+            <img src="{{ url_for('static', path='/images/blobby_maid.png') }}" alt="Marching image" class="marching-image">
+        </span>
+        <span class="eighth-width">
+            <img src="{{ url_for('static', path='/images/blobby_super.png') }}" alt="Marching image" class="marching-image">
+        </span>
+        <span class="eighth-width">
+            <img src="{{ url_for('static', path='/images/blobby.png') }}" alt="Marching image" class="marching-image">
+        </span>
+        <span class="eighth-width">
+            <img src="{{ url_for('static', path='/images/blobby_cat.png') }}" alt="Marching image" class="marching-image">
+        </span>
+        <span class="eighth-width">
+            <img src="{{ url_for('static', path='/images/blobby_maid.png') }}" alt="Marching image" class="marching-image">
+        </span>
+        <span class="eighth-width">
+            <img src="{{ url_for('static', path='/images/blobby_super.png') }}" alt="Marching image" class="marching-image">
+        </span>
+    </div>
+</div>
 <div class="container">
     <h1>Welcome to Cosplay Quest</h1>
     <p>Embark on an adventure in the world of cosplay with our exciting app!</p>
-    
+
     <form hx-post="/beta-signup" hx-swap="innerHTML scroll" hx-target="#responseMessage">
         <h2>Sign up to be part of the beta!</h2>
         <label for="name">Name <span style="color: red;">*</span></label>
@@ -22,14 +50,15 @@
         <input type="date" id="next_con_date" name="next_con_date" />
         <div class="switchbox">
             <label class="switch">
-                <input type="checkbox" id="will_cosplay" name="will_cosplay" hx-get="/toggle-character-form" hx-target="#character_form_container" hx-swap="innerHTML">
+                <input type="checkbox" id="will_cosplay" name="will_cosplay" hx-get="/toggle-character-form"
+                    hx-target="#character_form_container" hx-swap="innerHTML">
                 <span class="slider round"></span>
             </label>
             <label for="will_cosplay" class="switchlabel">I am going to cosplay.</label>
         </div>
         <div id="character_form_container" class="fillable_div"></div>
         <p><i><span style="color: red;">*</span> indicates a required field.</i></p>
-        <input type="submit" value="Submit" class="button button-primary"/>
+        <input type="submit" value="Submit" class="button button-primary" />
     </form>
     <div id="responseMessage"></div>
 
