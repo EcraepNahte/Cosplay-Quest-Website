@@ -20,7 +20,7 @@ site_build
 venv
 docs.zip
 archive.zip
-.db
+cosplay_quest_web.db
 
 # vim temporary files
 *~
