@@ -21,3 +21,6 @@ def create_beta_signup(db: Session, name: str, email: str, device_os: str, next_
 
 def get_all_beta_signups(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.BetaSignup).offset(skip).limit(limit).all()
+
+def get_all_characters(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Character).offset(skip).limit(limit).all()

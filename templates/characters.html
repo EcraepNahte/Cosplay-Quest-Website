@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Who can you find?</h1>
+    <p>This list shows all available characters in Cosplay Quest, and which pack they are available in.</p>
+
+    <div class="character-list">
+        <ul>
+            {% for character in character_list %}
+            <li class="character-item">
+                <img src="{{ character.reference_picture }}" class="character-picture" />
+                <a href="{{ character.reference_link }}" ><h3>{{ character.name }}</h3></a>
+                <p>{{ character.source_media }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
