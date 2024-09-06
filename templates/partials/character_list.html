@@ -1,0 +1,9 @@
+<ul>
+    {% for character in character_list %}
+    <li class="character-item">
+        <img src="{{ character.reference_picture }}" class="character-picture" />
+        <a href="{{ character.reference_link }}" ><h3>{{ character.name }}</h3></a>
+        <p>{{ character.source_media }}</p>
+    </li>
+    {% endfor %}
+</ul>

@@ -1,9 +1,11 @@
 import datetime
+import json
 from fastapi import FastAPI, Request, Form, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from app import models, crud
+from app.characters import organize_characters
 from app.database import SessionLocal, engine
 from app.migrations import run_migrations
 
@@ -51,6 +53,12 @@ async def submit_feedback(request: Request, name: str = Form(...), email: str = 
     crud.create_feedback(db, name, email, message, datetime.datetime.now())
     return templates.TemplateResponse("feedback.html", {"request": request, "success": True})
 
+@app.get("/character-list")
+async def character_list(request: Request, db: Session = Depends(get_db)):
+    character_list = crud.get_all_characters(db)
+    character_dicts = organize_characters(character_list)
+    return templates.TemplateResponse("characters.html", {"request": request, "characters": character_dicts})
+
 @app.get("/developer")
 async def developer(request: Request, db: Session = Depends(get_db)):
     feedback_list = crud.get_all_feedback(db)
@@ -75,4 +83,11 @@ async def feedback_stats(request: Request, db: Session = Depends(get_db)):
     total_feedback = db.query(models.Feedback).count()
     recent_feedback = db.query(models.Feedback).filter(models.Feedback.created_at >= datetime.datetime.now(datetime.UTC) - datetime.timedelta(days=7)).count()
     return templates.TemplateResponse("partials/feedback_stats.html", {"request": request, "total_feedback": total_feedback, "recent_feedback": recent_feedback})
+
+@app.get("/characters")
+async def characters(request: Request, db: Session = Depends(get_db)):
+    character_list = crud.get_all_characters(db)
+    character_dicts = [char.to_dict() for char in character_list]
+    return character_dicts
+
 
