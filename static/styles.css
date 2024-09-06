@@ -307,7 +307,7 @@
   .navigation-wrapper {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 499; /* highest without being above overlay */
     background-color: #f8f8f8;
   }
   .toggle-nav {
@@ -369,6 +369,7 @@
     padding: 20px;
     box-shadow: -2px 0 5px rgba(0,0,0,0.2);
     transition: right 0.3s ease-in-out;
+    z-index: 1000;
   }
   .detail-image {
     max-width: 100%;
@@ -393,6 +394,7 @@
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 500;
   }
   #overlay.active {
     display: block;
