@@ -37,6 +37,19 @@ class Character(Base):
     active = Column(Boolean)
     pack_id = Column(String, ForeignKey("packs.id"))
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "source_media": self.source_media,
+            "genre": self.genre if self.genre else '',
+            "reference_picture": self.reference_picture if self.reference_picture else '',
+            "reference_link": self.reference_link if self.reference_link else '',
+            "description": self.description if self.description else '',
+            "active": 'true' if self.active else 'false',
+            "pack_id": self.pack_id
+        }
+
 class Pack(Base):
     __tablename__ = "packs"
 

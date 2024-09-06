@@ -1,20 +1,54 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="container">
-    <h1>Who can you find?</h1>
-    <p>This list shows all available characters in Cosplay Quest, and which pack they are available in.</p>
+{% block extra_js %}
+<script src="{{ url_for('static', path='/js/characters.js') }}"></script>
+{% endblock %}
 
-    <div class="character-list">
-        <ul>
-            {% for character in character_list %}
-            <li class="character-item">
-                <img src="{{ character.reference_picture }}" class="character-picture" />
-                <a href="{{ character.reference_link }}" ><h3>{{ character.name }}</h3></a>
-                <p>{{ character.source_media }}</p>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+{% block content %}
+<div class="navigation-wrapper">
+    <button id="toggleNav" class="toggle-nav">Toggle Navigation</button>
+    <nav id="characterNavigation" class="character-navigation">
+        {% for pack, genres in characters.items() %}
+            <div class="nav-pack">
+                <a href="#pack-{{ pack }}">{{ pack }}</a>
+                <div class="nav-genres">
+                    {% for genre, chars in genres.items() %}
+                        <a href="#genre-{{ pack }}-{{ genre }}">{{ genre }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </nav>
+</div>
+
+<div class="character-container">
+    {% for pack, genres in characters.items() %}
+        <h1 id="pack-{{ pack }}" class="pack-header">{{ pack }}</h1>
+        {% for genre, chars in genres.items() %}
+            <h2 id="genre-{{ pack }}-{{ genre }}" class="genre-header">{{ genre }}</h2>
+            <div class="character-grid">
+                {% for character in chars %}
+                    <div class="character-card" onclick="showDetails({{ character }})">
+                        <img src="{{ character.reference_picture }}" alt="{{ character.name }}">
+                        <h4>{{ character.name }}</h4>
+                        <p>{{ character.source_media }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block foreground %}
+<div class="details-panel" id="detailsPanel">
+    <span class="close-btn" onclick="closeDetails()">&times;</span>
+    <h2 id="characterName"></h2>
+    <p id="characterSource"></p>
+    <a id="characterImageLink" href="" target="_blank">
+        <img id="characterImage" class="detail-image" src="" alt="">
+    </a>
+    <p id="characterDescription"></p>
+    <a id="characterLink" href="" target="_blank">Learn more</a>
 </div>
 {% endblock %}

@@ -6,6 +6,8 @@
     <title>Cosplay Quest</title>
     <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
     <script src="https://unpkg.com/htmx.org@1.9.4"></script>
+    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
 </head>
 <body>
     <nav>
@@ -15,5 +17,9 @@
         <a href="/feedback">Feedback</a>
     </nav>
     {% block content %}{% endblock %}
+
+    <div id="overlay" onclick="hideOverlay()"></div>
+
+    {% block foreground %}{% endblock %}
 </body>
 </html>
