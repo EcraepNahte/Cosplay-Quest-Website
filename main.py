@@ -1,11 +1,14 @@
+import csv
 import datetime
+import io
 import json
-from fastapi import FastAPI, Request, Form, Depends
+from fastapi import FastAPI, File, HTTPException, Request, Form, Depends, UploadFile
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from app import models, crud
 from app.characters import organize_characters
+from app.data_upload import udate_characters
 from app.database import SessionLocal, engine
 from app.migrations import run_migrations
 
@@ -55,7 +58,7 @@ async def submit_feedback(request: Request, name: str = Form(...), email: str = 
 
 @app.get("/character-list")
 async def character_list(request: Request, db: Session = Depends(get_db)):
-    character_list = crud.get_all_characters(db)
+    character_list = crud.get_all_characters(db, 0, 10000)
     character_dicts = organize_characters(character_list)
     return templates.TemplateResponse("characters.html", {"request": request, "characters": character_dicts})
 
@@ -91,3 +94,15 @@ async def characters(request: Request, db: Session = Depends(get_db)):
     return character_dicts
 
 
+@app.post("/upload-csv/")
+async def upload_csv(file: UploadFile = File(...), password: str = Form(...), db: Session = Depends(get_db)):
+    if not file.filename.endswith('.csv'):
+        raise HTTPException(status_code=400, detail="Invalid file type. Please upload a CSV file.")
+    
+    if password != "Upload4Ethan":
+        raise HTTPException(status_code=401, detail="You are not authorised to upload files.")
+
+    contents = await file.read()
+    csv_data = csv.DictReader(io.StringIO(contents.decode('utf-8')))
+    
+    udate_characters(db, csv_data)
